@@ -24,7 +24,7 @@
                          groupKey="group.names.probable.bugs"
                          enabledByDefault="true"
                          level="WARNING"
-                         implementationClass="com.edu.baboci.invokeLaterCall"/>
+                         implementationClass="com.edu.baboci.InvokeLaterCall"/>
 
 
     </extensions>

@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
-public class invokeLaterCall extends AbstractBaseJavaLocalInspectionTool {
+public class InvokeLaterCall extends AbstractBaseJavaLocalInspectionTool {
 
     // This string holds the class relevant to this inspection.
     @SuppressWarnings({"WeakerAccess"})
