@@ -2,17 +2,20 @@ package com.edu.baboci;
 
 import com.intellij.codeInspection.AbstractBaseJavaLocalInspectionTool;
 import com.intellij.codeInspection.ProblemsHolder;
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.*;
+import com.intellij.psi.util.PsiUtil;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
 
 public class invokeLaterCall extends AbstractBaseJavaLocalInspectionTool {
 
-    // This string holds a list of classes relevant to this inspection.
+    // This string holds the class relevant to this inspection.
     @SuppressWarnings({"WeakerAccess"})
     @NonNls
-    public String CHECKED_METHOD = "SwingUtilities.invokeLater";
+    public String CHECKED_METHOD = "javax.swing.SwingUtilities.invokeLater";
 
     @NotNull
     @Override
@@ -33,10 +36,14 @@ public class invokeLaterCall extends AbstractBaseJavaLocalInspectionTool {
             public void visitMethodCallExpression(PsiMethodCallExpression expression) {
                 super.visitMethodCallExpression(expression);
 
-                PsiExpression methodExpressionType = expression.getMethodExpression();
-                String theClassName = methodExpressionType.getText();
+                final PsiMethod method = expression.resolveMethod();
+                assert method != null;
+                String qualifiedName = Objects.requireNonNull(method.getContainingClass()).getQualifiedName();
+                String methodName = method.getName();
 
-                if (theClassName.equals(CHECKED_METHOD)) {
+                String fullPathClass = qualifiedName + "." + methodName;
+
+                if (fullPathClass.equals(CHECKED_METHOD)) {
                     // Identified an expression with potential problems, add to list and display.
                     holder.registerProblem(expression, DESCRIPTION_TEMPLATE);
                 }
