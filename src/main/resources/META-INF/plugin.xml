@@ -1,0 +1,37 @@
+<idea-plugin>
+    <id>com.cbu.baboci.my_first_plugin</id>
+    <name>Invoke Later Call</name>
+    <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
+
+    <description>
+    This Plugin is to tell the user that the Invoke Later Method called is not allowed to use in intelij.
+    </description>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products -->
+    <depends>com.intellij.modules.lang</depends>
+
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+
+
+        <localInspection language="JAVA"
+                         displayName="SDK: invokeLater Call"
+                         groupPath="Java"
+                         groupBundle="messages.InspectionsBundle"
+                         groupKey="group.names.probable.bugs"
+                         enabledByDefault="true"
+                         level="WARNING"
+                         implementationClass="com.edu.baboci.invokeLaterCall"/>
+
+
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+
+    </actions>
+
+</idea-plugin>
