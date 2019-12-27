@@ -2,12 +2,10 @@ package com.edu.baboci;
 
 import com.intellij.codeInspection.AbstractBaseJavaLocalInspectionTool;
 import com.intellij.codeInspection.ProblemsHolder;
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.*;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
-import javax.swing.*;
 
 public class invokeLaterCall extends AbstractBaseJavaLocalInspectionTool {
 
@@ -38,20 +36,11 @@ public class invokeLaterCall extends AbstractBaseJavaLocalInspectionTool {
                 PsiExpression methodExpressionType = expression.getMethodExpression();
                 String theClassName = methodExpressionType.getText();
 
-                if (isCheckedType(theClassName)) {
+                if (theClassName.equals(CHECKED_METHOD)) {
                     // Identified an expression with potential problems, add to list and display.
                     holder.registerProblem(expression, DESCRIPTION_TEMPLATE);
                 }
             }
-
-            private boolean isCheckedType(String className) {
-                if (className.equals(CHECKED_METHOD)) {
-                    return true;
-                }
-                return false;
-            }
         };
     }
-
 }
-
