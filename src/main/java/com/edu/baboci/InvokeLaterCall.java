@@ -38,10 +38,10 @@ public class InvokeLaterCall extends AbstractBaseJavaLocalInspectionTool {
 
                 final PsiMethod method = expression.resolveMethod();
                 assert method != null;
-                String qualifiedName = Objects.requireNonNull(method.getContainingClass()).getQualifiedName();
+                String classLibraryPath = Objects.requireNonNull(method.getContainingClass()).getQualifiedName();
                 String methodName = method.getName();
 
-                String fullPathClass = qualifiedName + "." + methodName;
+                String fullPathClass = classLibraryPath + "." + methodName;
 
                 if (fullPathClass.equals(CHECKED_METHOD)) {
                     // Identified an expression with potential problems, add to list and display.
